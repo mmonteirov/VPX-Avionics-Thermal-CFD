@@ -6,13 +6,11 @@
 ![Ansys Fluent](https://img.shields.io/badge/Ansys_Fluent-2026_R1-FFB71B?style=for-the-badge&logo=ansys&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Concluído-2ea44f?style=for-the-badge)
-![UnB](https://img.shields.io/badge/UnB-Eng._Aeroespacial-003DA5?style=for-the-badge)
-
 </div>
 
 ---
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 <table>
 <tr>
@@ -27,12 +25,12 @@ O objetivo central foi encontrar o **ponto de equilíbrio ideal** entre eficiên
 </td>
 <td width="45%" align="center">
 
-<!-- 🖼️ IMAGEM — FLUIDO (visão geral)
-     Contorno de velocidade ou pressão do fluido nos microcanais — visão isométrica.
+<!-- 🖼️ VISUAL 1 — GRADIENTE TÉRMICO (visão geral)
+     Screenshot do Ansys mostrando a placa completa com o mapa de temperatura.
      Dá a primeira impressão visual e técnica do projeto.
-     → Salve em: assets/fluid_overview.png -->
-<img src="assets/fluid_overview.png" width="100%" alt="Visão geral do escoamento nos microcanais"/>
-<sub><i>Escoamento do fluido refrigerante nos microcanais internos</i></sub>
+     → Salve em: assets/thermal_overview.png -->
+<img src="Media/Plate/temp placa 0.01.png" width="100%" alt="Visão geral do gradiente térmico da placa"/>
+<sub><i>Distribuição de temperatura no cold plate simulado no Ansys Fluent</i></sub>
 
 </td>
 </tr>
@@ -40,7 +38,7 @@ O objetivo central foi encontrar o **ponto de equilíbrio ideal** entre eficiên
 
 ---
 
-## ⚙️ Metodologia
+## Metodologia
 
 <table>
 <tr>
@@ -64,12 +62,12 @@ Foram testadas **três vazões mássicas** para mapear o comportamento do sistem
 </td>
 <td width="50%" align="center">
 
-<!-- 🖼️ IMAGEM — FLUIDO (detalhe dos canais)
-     Contorno de temperatura ou velocidade do fluido em corte transversal,
-     mostrando como o fluido percorre os microcanais.
-     → Salve em: assets/fluid_channels.png -->
-<img src="assets/fluid_channels.png" width="100%" alt="Detalhe do escoamento nos microcanais"/>
-<sub><i>Distribuição do fluido nos microcanais — corte transversal</i></sub>
+<!-- 🖼️ VISUAL 2 — CONTORNO TÉRMICO NA FACE INFERIOR (Figura 2 do relatório)
+     Screenshot do Ansys Fluent com o mapa de calor na face de contato com o FPGA.
+     Mostra claramente a zona de concentração térmica — é o visual mais impactante.
+     → Salve em: assets/thermal_contour.png -->
+<img src="Media/Plate/temp placa 0.05 baixo.png" width="100%" alt="Gradiente térmico na face de contato com o FPGA"/>
+<sub><i>Zona de concentração de calor na base de contato direto com o FPGA</i></sub>
 
 </td>
 </tr>
@@ -77,41 +75,7 @@ Foram testadas **três vazões mássicas** para mapear o comportamento do sistem
 
 ---
 
-## 🎬 Escoamento em Movimento
-
-<!-- 🎬 VÍDEO 1 — ANIMAÇÃO DO FLUIDO (visão geral)
-     Animação do Ansys mostrando a evolução do escoamento ao longo das iterações
-     ou um path-line animado do fluido percorrendo os canais.
-     GitHub suporta vídeos .mp4 diretamente no README (tamanho máx: 10 MB).
-     → Salve em: assets/fluid_flow_overview.mp4 -->
-<video src="assets/fluid_flow_overview.mp4" controls width="100%"></video>
-
-<table>
-<tr>
-<td width="50%" align="center">
-
-<!-- 🎬 VÍDEO 2 — ANIMAÇÃO DO FLUIDO (detalhe / ângulo alternativo)
-     Segundo vídeo com outro ângulo ou variável (ex: pressão, temperatura do fluido).
-     → Salve em: assets/fluid_flow_detail.mp4 -->
-<video src="assets/fluid_flow_detail.mp4" controls width="100%"></video>
-<sub><i>Detalhe do escoamento — variável: [pressão / temperatura / velocidade]</i></sub>
-
-</td>
-<td width="50%">
-
-**O que os vídeos mostram:**
-
-As animações exibem a **evolução transiente do escoamento** nos microcanais, geradas pelo Ansys Fluent a partir da solução CHT convergida.
-
-É possível observar a formação do **perfil de velocidade** nos canais, o transporte de energia térmica pelo fluido e a homogeneização progressiva da temperatura à medida que o fluido percorre a placa.
-
-</td>
-</tr>
-</table>
-
----
-
-## 📊 Resultados
+## Resultados
 
 ### Temperaturas de Equilíbrio
 
@@ -125,20 +89,20 @@ As animações exibem a **evolução transiente do escoamento** nos microcanais,
 | **0.03** | **304.28** | **294.60** |
 | 0.05 | 302.17 | 294.00 |
 
-> 🔴 **Limite do FPGA:** 313.15 K (40 °C)
+> **Limite do FPGA:** 313.15 K (40 °C)
 
 Ao dobrar a vazão de **0.01 → 0.03 kg/s**, a temperatura do FPGA cai **7.63 K**. Já de **0.03 → 0.05 kg/s**, a queda é de apenas **2.11 K** — um ganho marginal que não justifica o consumo extra da bomba.
 
 </td>
 <td width="55%" align="center">
 
-<!-- 🖼️ IMAGEM — CURVA DE RESFRIAMENTO (Figura 1 do relatório)
-     Gráfico Python de Temperatura × Vazão Mássica com as duas séries
-     (FPGA e saída do fluido) e a marcação do ponto ótimo em 0.03 kg/s.
-     É o visual mais importante do projeto — mostra claramente o "joelho" da curva.
-     → Salve em: assets/cooling_curve.png  (exporte em 300 dpi para boa legibilidade) -->
-<img src="assets/cooling_curve.png" width="100%" alt="Curva de resfriamento — Temperatura vs. Vazão Mássica"/>
-<sub><i>O achatamento após 0.03 kg/s define o ponto ótimo de operação</i></sub>
+<!-- 🖼️ VISUAL 3 — CURVA DE RESFRIAMENTO (Figura 1 do relatório)
+     O gráfico Python de Temperatura × Vazão Mássica com as duas séries
+     (FPGA e saída do fluido) e a marcação do ponto ótimo.
+     É o visual mais importante do projeto — mostra o "joelho" da curva.
+     → Salve em: assets/cooling_curve.png  (exporte em 300 dpi) -->
+<img src="Media/Graphics/curva_resfriamento_3uvpx.png" width="100%" alt="Curva de resfriamento — Temperatura vs. Vazão Mássica"/>
+<sub><i>Curva de resfriamento: o achatamento após 0.03 kg/s define o ponto ótimo de operação</i></sub>
 
 </td>
 </tr>
@@ -146,17 +110,17 @@ Ao dobrar a vazão de **0.01 → 0.03 kg/s**, a temperatura do FPGA cai **7.63 K
 
 ---
 
-### 📉 Convergência do Solver
+### Convergência do Solver
 
 <table>
 <tr>
 <td width="55%" align="center">
 
-<!-- 🖼️ IMAGEM — MONITOR DE CONVERGÊNCIA (Figura 3 do relatório)
+<!-- 🖼️ VISUAL 4 — MONITOR DE CONVERGÊNCIA (Figura 3 do relatório)
      Screenshot do monitor do Ansys Fluent mostrando a estabilização da
-     temperatura de saída da água ao longo das ~400 iterações (ṁ = 0.03 kg/s).
+     temperatura de saída da água ao longo das iterações (ṁ = 0.03 kg/s).
      → Salve em: assets/convergence_monitor.png -->
-<img src="assets/convergence_monitor.png" width="100%" alt="Monitor de convergência do Ansys Fluent"/>
+<img src="Media/Data/temp saida agua 0.03.png" width="100%" alt="Monitor de convergência do Ansys Fluent"/>
 <sub><i>Estabilização da temperatura de saída para ṁ = 0.03 kg/s</i></sub>
 
 </td>
@@ -164,9 +128,9 @@ Ao dobrar a vazão de **0.01 → 0.03 kg/s**, a temperatura do FPGA cai **7.63 K
 
 **Sobre a convergência:**
 
-O solver estabilizou a temperatura de saída do fluido em **294.60 K** após aproximadamente 200 iterações para a vazão ótima.
+O solver estabilizou a temperatura de saída do fluido em torno de **294.60 K** após aproximadamente 200 iterações para a vazão ótima.
 
-A curva suave confirma que o modelo k-ω SST capturou adequadamente o regime de escoamento turbulento nos microcanais, sem oscilações numéricas significativas.
+A curva suave de estabilização confirma que o modelo k-ω SST capturou adequadamente o regime de escoamento turbulento nos microcanais, sem oscilações numéricas significativas.
 
 </td>
 </tr>
@@ -174,7 +138,7 @@ A curva suave confirma que o modelo k-ω SST capturou adequadamente o regime de 
 
 ---
 
-## 💡 Conclusão
+## Conclusão
 
 A análise comprovou que **0.03 kg/s é a vazão ideal** para este cold plate: entrega resfriamento eficaz ao FPGA — bem abaixo do limite operacional de 313.15 K — sem sobrecarregar a hidrodinâmica da aeronave.
 
@@ -182,11 +146,10 @@ Aumentar para 0.05 kg/s proporciona apenas ~2 K de alívio adicional, o que **n�
 
 ---
 
-## 🛠️ Stack Técnica
+## Stack Técnica
 
 - **Ansys Fluent 2026 R1** — CFD solver e CHT
 - **Python 3.11 + Matplotlib / NumPy** — pós-processamento e visualização
-
 ---
 
 <div align="center">
