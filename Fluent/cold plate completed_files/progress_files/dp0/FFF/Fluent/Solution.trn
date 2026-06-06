@@ -1,0 +1,165 @@
+Transcript Start Time:  15:46:44, 05 Jun 2026 Hora oficial do Brasil 
+Current Directory: "C:\Users\Mateus\OneDrive\Documentos\UnB\4 sem\Projetos\Cold plate"
+
+Build Time: Feb  2 2026 16:32:00 EST 
+Executable Path: C:/PROGRA~1/ANSYSI~1/ANSYSS~1/v261/fluent/ntbin/win64/fluent.exe
+
+--------------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID    CPU Model Name                      
+--------------------------------------------------------------------------------------
+n3    DESKTOP-EEIK6UR  4/12  Windows-x64  1908   AMD Ryzen 5 5600 6-Core Processor   
+n2    DESKTOP-EEIK6UR  3/12  Windows-x64  27576  AMD Ryzen 5 5600 6-Core Processor   
+n1    DESKTOP-EEIK6UR  2/12  Windows-x64  29096  AMD Ryzen 5 5600 6-Core Processor   
+n0*   DESKTOP-EEIK6UR  1/12  Windows-x64  6036   AMD Ryzen 5 5600 6-Core Processor   
+host  DESKTOP-EEIK6UR        Windows-x64  1324   AMD Ryzen 5 5600 6-Core Processor   
+
+MPI Option Selected: intel
+Selected system interconnect: default
+--------------------------------------------------------------------------------------
+
+Cortex Process ID: 25700 
+License Server Path: () 
+Reading setting file in cache: "C:\Users\Mateus\OneDrive\Documentos\UnB\4 sem\Projetos\Cold plate\cold plate completed_files\dp0\FFF\Fluent\FFF.set"
+Reading "C:\Users\Mateus\OneDrive\Documentos\UnB\4 sem\Projetos\Cold plate\cold plate completed_files\dp0\FFF\MECH\FFF.1.msh"...
+Buffering for file scan...
+
+  107015 nodes, binary.
+   18048 nodes, binary.
+   19533 triangular wall faces, zone  1, binary.
+   14963 triangular wall faces, zone  2, binary.
+  290472 mixed interior faces, zone  3, binary.
+  802882 triangular interior faces, zone  4, binary.
+   10350 triangular wall faces, zone  9, binary.
+    3364 triangular wall faces, zone 10, binary.
+    1204 triangular wall faces, zone 11, binary.
+    1234 triangular wall faces, zone 12, binary.
+     160 mixed velocity-inlet faces, zone 13, binary.
+      72 mixed pressure-outlet faces, zone 14, binary.
+  130331 mixed cells, zone  5, binary.
+  414103 tetrahedral cells, zone  6, binary.
+
+
+Building...
+     mesh
+	auto partitioning mesh by Metis (fast),
+	distributing mesh
+		parts....,
+		faces....,
+		nodes....,
+		cells....,
+        bandwidth reduction using Reverse Cuthill-McKee: 104677/1872 = 55.9172
+     materials,
+     interface,
+     domains,
+	mixture
+     zones,
+	wall-componente1-componente1_fluido_refrigerante_volume-componente1-componente1_s_lido-shadow
+	outlet
+	inlet
+	heat_ram2
+	heat_ram1
+	heat_pmic
+	heat_fpga
+	componente1-componente1_s_lido
+	componente1-componente1_fluido_refrigerante_volume
+	interior-componente1-componente1_s_lido
+	interior-componente1-componente1_fluido_refrigerante_volume
+	wall-componente1-componente1_fluido_refrigerante_volume-componente1-componente1_s_lido
+	wall-componente1-componente1_s_lidoSetting componente1-componente1_s_lido (mixture) ... Done.
+
+WARNING: Current Mesh is incompatible with mesh operations defined. Following zones are missing:
+	componente1-componente1_agua_flu_da_volume
+	wall-componente1-componente1_agua_flu_da_volume
+
+Applying mesh operation "Change Zone Type"
+
+Applying mesh operation "Change Zone Type [ 2 ]"
+
+Applying mesh operation "Change Zone Type [ 3 ]"
+ Setting zone id of componente1-componente1_s_lido to 7.
+ Setting zone id of outlet to 11.
+ Setting zone id of inlet to 10.
+ Setting zone id of wall-componente1-componente1_s_lido to 2.
+ Setting zone id of interior-componente1-componente1_s_lido to 5.
+ Setting zone id of heat_fpga to 12.
+ Setting zone id of heat_pmic to 13.
+ Setting zone id of heat_ram1 to 14.
+ Setting zone id of heat_ram2 to 15.
+ Setting zone id of wall-componente1-componente1_fluido_refrigerante_volume-componente1-componente1_s_lido-shadow to 8.
+ Setting zone id of interior-componente1-componente1_fluido_refrigerante_volume to 3.
+ Setting zone id of wall-componente1-componente1_fluido_refrigerante_volume-componente1-componente1_s_lido to 38.
+ Setting zone id of componente1-componente1_fluido_refrigerante_volume to 39.
+Done.
+Setting componente1-componente1_s_lido (mixture) ... Done.
+No zone with name componente1-componente1_agua_flu_da_volume (type fluid) (mixture), skipped.
+No zone with name interior-componente1-componente1_agua_flu_da_volume-componente1-componente1_s_lido-shadow (type wall) (mixture), skipped.
+No zone with name interior-componente1-componente1_agua_flu_da_volume-componente1-componente1_s_lido (type wall) (mixture), skipped.
+Setting outlet (mixture) ... Done.
+Setting inlet (mixture) ... Done.
+No zone with name wall-componente1-componente1_agua_flu_da_volume (type wall) (mixture), skipped.
+Setting wall-componente1-componente1_s_lido (mixture) ... Done.
+No zone with name interior-componente1-componente1_agua_flu_da_volume (type interior) (mixture), skipped.
+Setting interior-componente1-componente1_s_lido (mixture) ... Done.
+Setting heat_fpga (mixture) ... Done.
+Setting heat_pmic (mixture) ... Done.
+Setting heat_ram1 (mixture) ... Done.
+Setting heat_ram2 (mixture) ... Done.
+
+Checking newly created zones for preferred zone IDs...
+No zone with name interior-componente1-componente1_agua_flu_da_volume (type interior) (mixture), skipped.
+No zone with name interior-componente1-componente1_agua_flu_da_volume-componente1-componente1_s_lido (type wall) (mixture), skipped.
+No zone with name interior-componente1-componente1_agua_flu_da_volume-componente1-componente1_s_lido-shadow (type wall) (mixture), skipped.
+
+     parallel,
+Done.
+
+Preparing mesh for display...
+Done.
+
+Setting Post Processing and Surfaces information ...	 Done.
+********************* WARNING ******************************************
+************************************************************************
+** Following expected zones were not found in the current mesh: 
+** 	componente1-componente1_agua_flu_da_volume
+** 	wall-componente1-componente1_agua_flu_da_volume
+** Found Following new zones in the current mesh: 
+** 	componente1-componente1_fluido_refrigerante_volume
+** 	wall-componente1-componente1_fluido_refrigerante_volume-componente1-componente1_s_lido-shadow
+** 	wall-componente1-componente1_fluido_refrigerante_volume-componente1-componente1_s_lido
+**
+** Please ensure that your current Setup is valid.
+************************************************************************
+************************************************************************
+Fast-loading "C:\PROGRA~1\ANSYSI~1\ANSYSS~1\v261\fluent\fluent26.1.0\\addons\afd\lib\hdfio.bin"
+Done.
+
+Writing to DESKTOP-EEIK6UR:"C:\Users\Mateus\OneDrive\Documentos\UnB\4 sem\Projetos\Cold plate\cold plate completed_files\dp0\FFF\Fluent\FFF.1-Setup-Output.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      544434 cells,     2 zones ...
+     1159197 faces,    11 zones ...
+      132527 nodes,     1 zone  ...
+  Done.
+Done.
+
+Performance Timer for 0 iterations on 4 compute nodes
+  Average wall-clock time per iteration:                0.000 sec
+  Global reductions per iteration:                          0 ops
+  Global reductions time per iteration:                 0.000 sec (0.0%)
+  Message count per iteration:                              0 messages
+  Data transfer per iteration:                          0.000 MB
+  LE solves per iteration:                                  0 solves
+  LE wall-clock time per iteration:                     0.000 sec (0.0%)
+  LE global solves per iteration:                           0 solves
+  LE global wall-clock time per iteration:              0.000 sec (0.0%)
+  LE global matrix maximum size:                            0
+  AMG cycles per iteration:                             0.000 cycles
+  Relaxation sweeps per iteration:                          0 sweeps
+  Relaxation exchanges per iteration:                       0 exchanges
+  LE early protections (stall) per iteration:           0.000 times
+  LE early protections (divergence) per iteration:      0.000 times
+  Total SVARS touched:                                    391
+
+  Total wall-clock time:                                0.000 sec
+
+Transcript Stop Time:  15:47:18, 05 Jun 2026 Hora oficial do Brasil 
+Total Transcript Time: 0 Minute 33 Second.

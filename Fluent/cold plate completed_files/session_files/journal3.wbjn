@@ -1,0 +1,16 @@
+# encoding: utf-8
+# 2026 R1
+SetScriptVersion(Version="26.1.174")
+system1 = GetSystem(Name="FFF")
+meshComponent1 = system1.GetComponent(Name="Mesh")
+meshComponent1.Refresh()
+mesh1 = system1.GetContainer(ComponentName="Mesh")
+mesh1.Edit()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+geometry1.Exit()
+mesh1.Exit()
+geometry1.SetFile(FilePath=GetAbsoluteUserPathName("UnB/4 sem/Projetos/Cold plate/cold plate.scdocx"))
+meshComponent1.Refresh()
+mesh1.Edit()
+Save(Overwrite=True)
