@@ -1,36 +1,33 @@
-# 🧊 Cold Plate Térmico — Aviônicos 3U VPX
-### Análise CHT (Conjugate Heat Transfer) com Ansys Fluent
+# Cold Plate Thermal Analysis — 3U VPX Avionics
+### CHT (Conjugate Heat Transfer) Analysis with Ansys Fluent
 
 <div align="center">
 
 ![Ansys Fluent](https://img.shields.io/badge/Ansys_Fluent-2026_R1-FFB71B?style=for-the-badge&logo=ansys&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Concluído-2ea44f?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completed-2ea44f?style=for-the-badge)
+
 </div>
 
 ---
 
-## Sobre o Projeto
+## About
 
 <table>
 <tr>
 <td width="55%">
 
-Este repositório documenta a **otimização termofluidodinâmica** de um *cold plate* no padrão **3U VPX**, desenvolvida como parte da formação em Engenharia Aeroespacial na Universidade de Brasília.
+This repository documents the **thermofluidodynamic optimization** of a *cold plate* in the **3U VPX** standard, developed as part of the Aerospace Engineering program at the University of Brasília.
 
-O objetivo central foi encontrar o **ponto de equilíbrio ideal** entre eficiência de resfriamento de um FPGA de alta potência e o esforço de bombeamento do fluido — uma troca fundamental em sistemas embarcados aeroespaciais, onde cada watt da bomba compete com a missão.
+The core objective was to find the **ideal operating point** between the cooling efficiency of a high-power FPGA and the fluid pumping effort — a fundamental trade-off in aerospace embedded systems, where every watt drawn by the pump competes directly with the mission.
 
-> *"Com o aumento da densidade de potência nos sistemas embarcados, a dissipação de calor deixou de ser um detalhe de projeto para se tornar o próprio* gating factor *do desenvolvimento."*
+> *"As power density increases in embedded systems, heat dissipation has shifted from a design detail to the very* gating factor *of development."*
 
 </td>
 <td width="45%" align="center">
 
-<!-- 🖼️ VISUAL 1 — GRADIENTE TÉRMICO (visão geral)
-     Screenshot do Ansys mostrando a placa completa com o mapa de temperatura.
-     Dá a primeira impressão visual e técnica do projeto.
-     → Salve em: assets/thermal_overview.png -->
-<img src="Media/Plate/temp placa 0.01.png" width="100%" alt="Visão geral do gradiente térmico da placa"/>
-<sub><i>Distribuição de temperatura no cold plate simulado no Ansys Fluent</i></sub>
+<img src="Media/Plate/temp placa 0.01.png" width="100%" alt="Overall thermal gradient of the cold plate"/>
+<sub><i>Temperature distribution across the cold plate simulated in Ansys Fluent</i></sub>
 
 </td>
 </tr>
@@ -38,36 +35,32 @@ O objetivo central foi encontrar o **ponto de equilíbrio ideal** entre eficiên
 
 ---
 
-## Metodologia
+## Methodology
 
 <table>
 <tr>
 <td width="50%">
 
-| Etapa | Ferramenta | Detalhes |
+| Stage | Tool | Details |
 |---|---|---|
-| Modelagem | Ansys | Cold plate com microcanais internos |
-| Solver CFD | Ansys Fluent 2026 R1 | CHT — Conjugate Heat Transfer |
-| Turbulência | k-ω SST | Escoamentos em canais confinados |
-| Pós-processamento | Python | Curvas e análise de convergência |
+| Modeling | Ansys | Cold plate with internal microchannels |
+| CFD Solver | Ansys Fluent 2026 R1 | CHT — Conjugate Heat Transfer |
+| Turbulence Model | k-ω SST | Suitable for confined channel flows |
+| Post-processing | Python | Curve generation and convergence analysis |
 
-Foram testadas **três vazões mássicas** para mapear o comportamento do sistema:
+Three mass flow rates were tested to map the system's thermal behavior:
 
 ```
-ṁ₁ = 0.01 kg/s  →  baixo bombeamento
-ṁ₂ = 0.03 kg/s  →  ponto ótimo ✅
-ṁ₃ = 0.05 kg/s  →  retornos decrescentes
+m1 = 0.01 kg/s  →  low pumping regime
+m2 = 0.03 kg/s  →  optimal point ✓
+m3 = 0.05 kg/s  →  diminishing returns regime
 ```
 
 </td>
 <td width="50%" align="center">
 
-<!-- 🖼️ VISUAL 2 — CONTORNO TÉRMICO NA FACE INFERIOR (Figura 2 do relatório)
-     Screenshot do Ansys Fluent com o mapa de calor na face de contato com o FPGA.
-     Mostra claramente a zona de concentração térmica — é o visual mais impactante.
-     → Salve em: assets/thermal_contour.png -->
-<img src="Media/Plate/temp placa 0.05 baixo.png" width="100%" alt="Gradiente térmico na face de contato com o FPGA"/>
-<sub><i>Zona de concentração de calor na base de contato direto com o FPGA</i></sub>
+<img src="Media/Plate/temp placa 0.05 baixo.png" width="100%" alt="Thermal gradient at the FPGA contact face"/>
+<sub><i>Heat concentration zone at the direct FPGA contact surface</i></sub>
 
 </td>
 </tr>
@@ -75,34 +68,29 @@ Foram testadas **três vazões mássicas** para mapear o comportamento do sistem
 
 ---
 
-## Resultados
+## Results
 
-### Temperaturas de Equilíbrio
+### Equilibrium Temperatures
 
 <table>
 <tr>
 <td width="45%">
 
-| Vazão (kg/s) | FPGA (K) | Fluido Saída (K) |
+| Flow Rate (kg/s) | FPGA (K) | Fluid Outlet (K) |
 |:---:|:---:|:---:|
 | 0.01 | 311.91 | 298.10 |
 | **0.03** | **304.28** | **294.60** |
 | 0.05 | 302.17 | 294.00 |
 
-> **Limite do FPGA:** 313.15 K (40 °C)
+> **FPGA operational limit:** 313.15 K (40 °C)
 
-Ao dobrar a vazão de **0.01 → 0.03 kg/s**, a temperatura do FPGA cai **7.63 K**. Já de **0.03 → 0.05 kg/s**, a queda é de apenas **2.11 K** — um ganho marginal que não justifica o consumo extra da bomba.
+Doubling the flow rate from **0.01 to 0.03 kg/s** drops the FPGA temperature by **7.63 K**. Going from **0.03 to 0.05 kg/s**, however, yields only **2.11 K** of additional relief — a marginal gain that does not justify the extra pump energy consumption.
 
 </td>
 <td width="55%" align="center">
 
-<!-- 🖼️ VISUAL 3 — CURVA DE RESFRIAMENTO (Figura 1 do relatório)
-     O gráfico Python de Temperatura × Vazão Mássica com as duas séries
-     (FPGA e saída do fluido) e a marcação do ponto ótimo.
-     É o visual mais importante do projeto — mostra o "joelho" da curva.
-     → Salve em: assets/cooling_curve.png  (exporte em 300 dpi) -->
-<img src="Media/Graphics/curva_resfriamento_3uvpx.png" width="100%" alt="Curva de resfriamento — Temperatura vs. Vazão Mássica"/>
-<sub><i>Curva de resfriamento: o achatamento após 0.03 kg/s define o ponto ótimo de operação</i></sub>
+<img src="Media/Graphics/curva_resfriamento_3uvpx.png" width="100%" alt="Cooling curve — Temperature vs. Mass Flow Rate"/>
+<sub><i>Cooling curve: the flattening after 0.03 kg/s defines the optimal operating point</i></sub>
 
 </td>
 </tr>
@@ -110,27 +98,23 @@ Ao dobrar a vazão de **0.01 → 0.03 kg/s**, a temperatura do FPGA cai **7.63 K
 
 ---
 
-### Convergência do Solver
+### Solver Convergence
 
 <table>
 <tr>
 <td width="55%" align="center">
 
-<!-- 🖼️ VISUAL 4 — MONITOR DE CONVERGÊNCIA (Figura 3 do relatório)
-     Screenshot do monitor do Ansys Fluent mostrando a estabilização da
-     temperatura de saída da água ao longo das iterações (ṁ = 0.03 kg/s).
-     → Salve em: assets/convergence_monitor.png -->
-<img src="Media/Data/temp saida agua 0.03.png" width="100%" alt="Monitor de convergência do Ansys Fluent"/>
-<sub><i>Estabilização da temperatura de saída para ṁ = 0.03 kg/s</i></sub>
+<img src="Media/Data/temp saida agua 0.03.png" width="100%" alt="Ansys Fluent convergence monitor"/>
+<sub><i>Outlet temperature stabilization for m = 0.03 kg/s</i></sub>
 
 </td>
 <td width="45%">
 
-**Sobre a convergência:**
+**On convergence:**
 
-O solver estabilizou a temperatura de saída do fluido em torno de **294.60 K** após aproximadamente 200 iterações para a vazão ótima.
+The solver stabilized the fluid outlet temperature at **294.60 K** after approximately 200 iterations for the optimal flow rate.
 
-A curva suave de estabilização confirma que o modelo k-ω SST capturou adequadamente o regime de escoamento turbulento nos microcanais, sem oscilações numéricas significativas.
+The smooth stabilization curve confirms that the k-ω SST model adequately captured the turbulent flow regime inside the microchannels, with no significant numerical oscillations.
 
 </td>
 </tr>
@@ -138,20 +122,21 @@ A curva suave de estabilização confirma que o modelo k-ω SST capturou adequad
 
 ---
 
-## Conclusão
+## Conclusion
 
-A análise comprovou que **0.03 kg/s é a vazão ideal** para este cold plate: entrega resfriamento eficaz ao FPGA — bem abaixo do limite operacional de 313.15 K — sem sobrecarregar a hidrodinâmica da aeronave.
+The analysis confirmed that **0.03 kg/s is the ideal flow rate** for this cold plate: it delivers effective FPGA cooling — well below the 313.15 K operational limit — without overloading the aircraft's hydraulic system.
 
-Aumentar para 0.05 kg/s proporciona apenas ~2 K de alívio adicional, o que **não justifica o custo energético extra da bomba** em um sistema embarcado onde cada recurso é crítico.
+Increasing to 0.05 kg/s provides only ~2 K of additional relief, which **does not justify the extra pump energy cost** in an embedded system where every resource is critical.
 
 ---
 
-## Stack Técnica
+## Tech Stack
 
-- **Ansys Fluent 2026 R1** — CFD solver e CHT
-- **Python 3.11 + Matplotlib / NumPy** — pós-processamento e visualização
+- **Ansys Fluent 2026 R1** — CFD solver and CHT
+- **Python 3.11 + Matplotlib / NumPy** — post-processing and data visualization
+
 ---
 
 <div align="center">
-<sub>Desenvolvido como projeto acadêmico de termodinâmica computacional aplicada à engenharia aeroespacial.</sub>
+<sub>Developed as an academic project in computational thermodynamics applied to aerospace engineering.</sub>
 </div>
