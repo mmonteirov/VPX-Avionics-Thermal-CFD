@@ -1,19 +1,8 @@
-"""
-=============================================================================
-Análise de Resfriamento — Cold Plate Aviônico 3U VPX
-Dados CHT extraídos do Ansys Fluent
-Autor: Engenheiro de Dados / Python Developer Sênior
-=============================================================================
-"""
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.lines import Line2D
 
-# =============================================================================
-# 1. ESTRUTURAÇÃO DOS DADOS (Ansys Fluent — CHT Simulation)
-# =============================================================================
 data = {
     'Vazao_Massica_kgs': [0.01, 0.03, 0.05],
     'Temp_FPGA_K':        [311.90784, 304.28266, 302.16741],
@@ -27,9 +16,6 @@ print("=" * 55)
 print(df.to_string(index=False))
 print("=" * 55)
 
-# =============================================================================
-# 2. CONFIGURAÇÃO DE ESTILO PROFISSIONAL
-# =============================================================================
 plt.style.use('seaborn-v0_8-whitegrid')
 
 # Paleta de cores controlada
@@ -39,16 +25,9 @@ COR_TITULO  = '#1C2833'
 COR_LIMITE  = '#E67E22'   # Laranja — linha de referência de alerta
 COR_TEXTO   = '#2C3E50'
 
-# =============================================================================
-# 3. CRIAÇÃO DA FIGURA E EIXO PRINCIPAL
-# =============================================================================
 fig, ax = plt.subplots(figsize=(11, 6.5))
 fig.patch.set_facecolor('white')
 ax.set_facecolor('#FDFEFE')
-
-# =============================================================================
-# 4. PLOTAGEM DAS CURVAS
-# =============================================================================
 
 # --- Curva 1: Temperatura Média do FPGA ---
 ax.plot(
@@ -80,9 +59,6 @@ ax.plot(
     zorder=5,
 )
 
-# =============================================================================
-# 5. ANOTAÇÃO ESTRATÉGICA — Ponto Ótimo em 0.03 kg/s
-# =============================================================================
 ponto_x = df.loc[1, 'Vazao_Massica_kgs']   # 0.03 kg/s
 ponto_y = df.loc[1, 'Temp_FPGA_K']          # 304.28 K
 
@@ -111,7 +87,7 @@ ax.annotate(
     zorder=10,
 )
 
-# Destaque visual no ponto ótimo (halo)
+# Destaque visual no alo
 ax.scatter(
     [ponto_x], [ponto_y],
     s=180, color='none',
@@ -119,23 +95,17 @@ ax.scatter(
     zorder=6,
 )
 
-# =============================================================================
-# 6. LINHA DE REFERÊNCIA — Limite Máximo de Operação do FPGA
-# =============================================================================
-T_LIMITE = 313.15   # 40°C (temperatura ambiente típica de operação aviônica)
+T_LIMITE = 313.15   # 40°C 
 ax.axhline(
     y=T_LIMITE,
     color=COR_LIMITE,
     linewidth=1.2,
-    linestyle=(0, (6, 3)),   # traço-ponto
+    linestyle=(0, (6, 3)),  
     alpha=0.75,
     label=f'Limite Operacional FPGA  ({T_LIMITE:.2f} K / 40 °C)',
     zorder=3,
 )
 
-# =============================================================================
-# 7. FORMATAÇÃO DOS EIXOS
-# =============================================================================
 ax.set_xlabel(
     'Vazão Mássica do Coolant  ṁ  (kg/s)',
     fontsize=13,
@@ -176,9 +146,6 @@ ax2.set_xlabel('Vazão Mássica  ṁ  (g/s)', fontsize=10.5,
 ax2.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.0f'))
 ax2.tick_params(labelsize=10, colors='#717D7E')
 
-# =============================================================================
-# 8. LEGENDA
-# =============================================================================
 ax.legend(
     fontsize=11,
     loc='upper right',
@@ -190,9 +157,6 @@ ax.legend(
     labelspacing=0.6,
 )
 
-# =============================================================================
-# 9. GRADE E ACABAMENTOS VISUAIS
-# =============================================================================
 ax.grid(True, which='major', linestyle='--', linewidth=0.7, alpha=0.65, color='#CCD1D1')
 ax.grid(True, which='minor', linestyle=':', linewidth=0.4, alpha=0.4)
 ax.minorticks_on()
@@ -232,9 +196,6 @@ fig.text(
     fontstyle='italic',
 )
 
-# =============================================================================
-# 10. LAYOUT FINAL E EXPORTAÇÃO
-# =============================================================================
 plt.tight_layout(pad=1.8)
 
 output_path = '/mnt/user-data/outputs/curva_resfriamento_3uvpx.png'
